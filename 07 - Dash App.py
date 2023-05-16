@@ -71,7 +71,7 @@ def get_pie_chart(entered_site):
         return [dcc.Graph(figure=fig)]
     else:
         filtered_df = spacex_df[spacex_df['Launch Site']==entered_site]
-        filtered_df = spacex_df.groupby('class').count().reset_index()
+        filtered_df = filtered_df.groupby('class').count().reset_index()
         fig = px.pie(filtered_df, values='Launch Site', 
         names='class', 
         title='Total Succes Launches for Site %s' % entered_site
@@ -91,7 +91,7 @@ def get_scatter_plot(entered_site, payload_mass):
     if entered_site == 'ALL':
         fig = px.scatter(filtered_df, x="Payload Mass (kg)", y="class",
                         color="Booster Version Category", 
-                        title='Correlation Between Payload and Success for All Sites',
+                        title='Correlation Between Payload and Success Landing for All Sites',
                         width=1500, height=600)
         
         return [dcc.Graph(figure=fig)]
@@ -99,7 +99,7 @@ def get_scatter_plot(entered_site, payload_mass):
         filtered_df = filtered_df[filtered_df['Launch Site']==entered_site]
         fig = px.scatter(filtered_df, x="Payload Mass (kg)", y="class",
                         color="Booster Version Category",
-                        title='Correlation Between Payload and Success for Site %s' % entered_site,
+                        title='Correlation Between Payload and Success Landing for Site %s' % entered_site,
                         width=1500, height=600)
         return [dcc.Graph(figure=fig)]                
 
